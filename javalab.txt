@@ -1,0 +1,546 @@
+package lab1;
+
+public class Student {
+
+	int id,age;
+	String name;
+	
+	Student(int id,int age, String name)
+	{
+	
+		 this.id=id;
+		 this.age=age;
+		 this.name=name;
+		
+	}
+	
+	public int getid()
+	{
+		 return this.id;
+	}
+	
+	public int getage()
+	{
+		 return this.age;	 
+	}
+	
+	public String getname()
+	{
+		 return this.name;	 
+	}
+		 
+}
+------------
+package lab1;
+
+public class Employee {
+
+	int id;
+	String name,design;
+	
+	Employee(int id, String name ,String design )
+	{
+	   this.id = id;
+	   this.name =name;
+	   this.design = design;
+	   
+	}
+	
+	public int getid()
+	{
+		 return this.id;
+		 
+	}
+	
+	public String getname()
+	{
+		 return this.name;
+		 
+	}
+	
+	public String getdesign()
+	{
+		 return this.design;
+		 
+	}
+	
+
+}
+---------
+package lab1;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+public class Arraylink {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+	    ArrayList<Student> s= null;
+	    LinkedList<Employee> e=null;
+	    int ch,id,age;
+	    String name,design;
+	    
+	    while(true)
+	    {
+	    	 System.out.println("1.Create ArrayList 2.Insert into ArrayList 3.Display the ArrayList 4.Delete the ArrayList 5.Create Linklist 6.Insert into Linklist 8.Delete from front 9.Delete from Last: ");
+	    	 System.out.println("Enter your choice:");
+	    	 ch=sc.nextInt();
+	    	 
+	    	 switch(ch)
+	    	 {
+	    	 case 1:
+	    	        s=new ArrayList<>();
+	    	        break;
+	    	        
+	    	 case 2:
+	    		    System.out.println("Enter student id");
+	    		    id=sc.nextInt();sc.nextLine();
+	    		    System.out.println("Enter student name:");
+	    		    name=sc.nextLine();
+	    		    System.out.println("Enter student age:");
+	    		    age=sc.nextInt();
+	    		    s.add(new Student(id , age,name));
+	    		    break;
+	    		    
+	    	 case 3:
+	    		    System.out.println("Display ArrayList:");
+	    		    for(Student st:s)
+	    		    {  
+	    		     System.out.println("Id:"+st.getid());
+	    		     System.out.println("Age:"+st.getage());
+	    		     System.out.println("Name:"+st.getname());		        		    		    		    
+	    		    }
+	    		    break;
+	    	 case 4:
+	    		   System.out.println("Enter id no to remove:");
+	    		   id=sc.nextInt();
+	    		   s.remove(id);
+	    		   break;
+	    		   
+	    	 case 5:
+	    		    e=new LinkedList<>();
+	    		    break;
+	    		    
+	    	 case 6:
+	    		   System.out.println("Enter Id:");
+	    		   id=sc.nextInt();sc.nextLine();
+	    		   System.out.println("Enter Name:");
+	    		   name=sc.nextLine();
+	    		   System.out.println("Enter designation:");
+	    		   design = sc.nextLine();
+	    		   e.add(new Employee(id,name,design));
+	    		   break;
+	    	 case 7:
+	    		    System.out.println("Displaying LinkList:");
+	    		    for(Employee em:e)
+	    		    {
+	    		    	 System.out.println("ID:"+em.getid());
+	    		    	 System.out.println("Name:"+em.getname());
+                         System.out.println("Designation:"+em.getdesign());	    		    	 
+	    		    }
+	    		    break;
+	    	 case 8:
+	    		    System.out.printf("Removing front name:",e.removeFirst().name);
+	    		    break;
+	    	 case 9:
+
+	    		    System.out.printf("Removing last name:",e.removeLast().name);
+	    		    break;
+	    	default:
+	    		   System.out.println("Invalid choice:")	    
+	    	 }
+	    }
+		
+	}
+
+}
+------------lab1------------------------------
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+public class Treemappro1 {
+	String state,capital;
+	TreeMap<String,String> dict= new TreeMap<String,String>();
+	void set(String state,String capital)
+	{
+		dict.put(state, capital);
+	}
+	void get()
+	{
+		System.out.println("State \t Capital");
+		for(Map.Entry<String, String> word : dict.entrySet())
+		{
+			System.out.println(word.getKey()+"\t"+word.getValue());
+			
+		}
+			
+	}
+   void search(String key)
+   {
+	   if(dict.containsKey(key))
+	   {
+		   System.out.println("The key is present");
+	   }
+	   else
+	   {
+		   System.out.println("The key is not present");
+	   }
+	   
+   }
+	
+		
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Treemappro1 obj= new Treemappro1();
+		Scanner sc=new Scanner(System.in);
+		while(true)
+		{
+			System.out.println("MENU");
+			System.out.println("1.Adding Element");
+			System.out.println("2.Sorting");
+			System.out.println("3.Display");
+			System.out.println("Enter your choice");
+			int ch= sc.nextInt();
+			switch(ch)
+			{
+					case 1:System.out.println("Enter the state name");
+							String state=sc.next();
+							System.out.println("Enter the capital name");
+							String capital=sc.next();
+							obj.set(state,capital);
+							break;
+					case 2: System.out.println("Enter the key to search");
+							String key=sc.next();
+						obj.search(key);
+							break;
+					case 3:obj.get();
+							break;
+						
+			}
+		
+		
+		}
+
+	}
+
+}
+------------
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.List;
+import java.util.LinkedList;
+public class HashMappro1 {
+	String state,capital;
+	Map<String,String> dict= new HashMap<String,String>();
+	void set(String state,String capital)
+	{
+		dict.put(state, capital);
+	}
+	void get()
+	{
+		System.out.println("State \t Capital");
+		for(Map.Entry<String, String> word : dict.entrySet())
+		{
+			System.out.println(word.getKey()+"\t"+word.getValue());
+			
+		}
+			
+	}
+	void sort()
+	{
+		
+		List<Entry<String,String>> list = new LinkedList<Entry<String,String>>(dict.entrySet());
+		Collections.sort(list, new Comparator<Entry<String,String>>(){
+			 public int compare(Entry<String,String> ol, Entry<String,String> ol2)   
+			 {
+				 return ol.getValue().compareTo(ol2.getValue());
+			 }
+			
+		});
+		for(Entry<String,String> item:list)
+		{
+			System.out.println(item);
+		}
+		
+		
+		
+		
+		
+		//List<String> list = new LinkedList<String>(dict.keySet());
+		//Collections.sort(list, new Comparator<String>(){
+		//	 public int compare(String ol, String ol2)   
+			// {
+				// return ol.compareTo(ol2);
+						 //getValue().compareTo(ol2.getValue());
+			 //}
+			
+	//	});
+		//for(String item:list)
+		//{
+			//System.out.println(item);
+		//}
+		
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashMappro1 obj= new HashMappro1();
+		Scanner sc=new Scanner(System.in);
+		while(true)
+		{
+			System.out.println("MENU");
+			System.out.println("1.Adding Element");
+			System.out.println("2.Sorting");
+			System.out.println("3.Display");
+			System.out.println("Enter your choice");
+			int ch= sc.nextInt();
+			switch(ch)
+			{
+					case 1:System.out.println("Enter the state name");
+							String state=sc.next();
+							System.out.println("Enter the capital name");
+							String capital=sc.next();
+							obj.set(state,capital);
+							break;
+					case 2:obj.sort();
+							break;
+					case 3:obj.get();
+							break;
+						
+			}
+		
+		
+		}
+
+	}
+
+}
+----------------lab3----
+package RestCoap.RestCoap;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}
+-----------
+package RestCoap.RestCoap;
+
+import java.io.IOException;
+
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.elements.exception.ConnectorException;
+
+public class Coap_client {
+
+	public static void main(String[] args) {
+		CoapClient client = new CoapClient("coap://172.16.34.118/humidity");
+		for(int i = 0; i<10; i++) {
+			String text;
+			try {
+				text = client.get().getResponseText();
+				System.out.println("text "+text);
+				Thread.sleep(1000);
+			} catch (ConnectorException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+}
+------------
+package RestCoap.RestCoap;
+
+import org.eclipse.californium.core.CoapResource;
+import org.eclipse.californium.core.CoapServer;
+import org.eclipse.californium.core.server.resources.CoapExchange;
+
+public class MyResource1 extends CoapResource {
+	public MyResource1(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	private int i=0;
+	
+	
+	@Override
+	public void handleGET(CoapExchange exchange) {
+		exchange.respond("hello world"+i++);
+	}
+
+	public static void main(String[] args) {
+		CoapServer server = new CoapServer();
+		server.add(new MyResource1("hello"));
+		server.add(new MyResource1("hello1"));
+		server.start();
+
+	}
+
+}
+----------lab4-------------
+import java.io.Closeable;
+import java.util.List;
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+public class student_main {
+static Scanner sc = new Scanner(System.in);
+
+StandardServiceRegistry ssr;
+Metadata md;
+SessionFactory sf;
+Session session;
+Transaction t;
+public void connect() {
+	ssr = (StandardServiceRegistry) new StandardServiceRegistryBuilder().configure("hibernate.hbm.xml").build();
+	md = new MetadataSources(ssr).getMetadataBuilder().build();
+	sf=(SessionFactory) md.getSessionFactoryBuilder().build();
+	session = (Session) ((org.hibernate.SessionFactory) sf).openSession();
+	t=(Transaction) session.beginTransaction();
+	
+}
+public void insert() throws SecurityException{
+	connect();
+	student s = new student();
+	s.setId(1);
+	s.setUSN("1RV20MC030");
+	
+	s.setName("Kavi");
+	s.setSubject("English");
+	s.setMarks(96);
+	((org.hibernate.Session) session).save(s);
+	t.commit();
+	//session.close();
+	
+}
+public void delete() throws SecurityException {
+	connect();
+	student s1 = new student();
+	System.out.println("Enter id to delete");
+	int id = sc.nextInt();
+	s1.setId(id);
+	session.delete(s1);
+	t.commit();
+}
+public void select() {
+	List<student> s =session.createQuery("select * from stud").list();
+	for(student i:s) {
+		System.out.println(i.getId());
+	}
+}
+
+public static void main(String args[]) throws SecurityException{
+	student_main st = new student_main();
+	while(true) {
+	System.out.println("\n 1.Insert \n 2.Select \n 3.Delete \n 4.Exit\n");
+	System.out.println("Enter choice:");
+	int ch=sc.nextInt();
+	switch(ch){
+	case 1:
+		System.out.println("Insert data");
+		st.insert();
+		break;
+	case 2:
+		System.out.println("Select data");
+		st.select();
+		break;
+	case 3:
+		System.out.println("delete");
+		st.delete();
+		break;
+	default:
+		System.out.println("Exit");
+		break;
+		
+	}
+	
+	
+	
+	}
+	
+}
+
+}
+--------------------
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class student implements Serializable{
+    @Id
+	int id,marks;
+	String USN,Name,Subject;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getMarks() {
+		return marks;
+	}
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+	public String getUSN() {
+		return USN;
+	}
+	public void setUSN(String uSN) {
+		USN = uSN;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+	public String getSubject() {
+		return Subject;
+	}
+	public void setSubject(String subject) {
+		Subject = subject;
+	}
+	
+}
+----------lab5---------------
