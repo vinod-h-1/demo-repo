@@ -1,0 +1,62 @@
+ ProgressBar pb;
+    Button btn;
+    int i=0;
+    Handler hdr=new Handler();
+    TextView txtview;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        pb=findViewById(R.id.progressBar);
+        btn=findViewById(R.id.button2);
+        txtview=findViewById(R.id.textView2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i=pb.getProgress();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (i<100){
+                            i+=1;
+                            hdr.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pb.setProgress(i);
+                                    txtview.setText(i+"/"+pb.getMax());
+                                }
+                            });
+                            try {
+                                Thread.sleep(100);
+                            }
+                            catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
+            }
+        });
+    }
+    public void verify1(View view){
+        AlertDialog.Builder abd=new AlertDialog.Builder(this);
+        abd.setTitle("confirmation!!");
+        abd.setMessage("do you really want to cancle this?");
+        abd.setIcon(R.drawable.imag);
+        abd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        abd.setNegativeButton("CANCLE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Cancelled the request", Toast.LENGTH_SHORT).show();
+            }
+        });
+        abd.setCancelable(false);
+        abd.create().show();
+    }
+}
+
