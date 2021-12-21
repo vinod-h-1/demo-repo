@@ -1,0 +1,119 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+public class ArrayLink {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+	    ArrayList<Student> s= null;
+	    LinkedList<Employee> e=null;
+	    int ch,id,age;
+	    String name,design;
+	    while(true)
+	    {
+	    	 System.out.println("1.Create ArrayList 2.Insert into ArrayList 3.Display the ArrayList "
+	    	 		+ "4.Delete the ArrayList 5.Create Linklist 6.Insert into Linklist"
+	    	 		+ " 8.Delete from front 9.Delete from Last: ");
+	    	 System.out.println("Enter your choice:");
+	    	 ch=sc.nextInt();
+	    	 switch(ch)
+	    	 {
+	    	 case 1:
+	    	        s=new ArrayList<>();
+	    	        break;
+	    	 case 2:
+	    		    System.out.println("Enter student id");
+	    		    id=sc.nextInt();sc.nextLine();
+	    		    System.out.println("Enter student name:");
+	    		    name=sc.nextLine();
+	    		    System.out.println("Enter student age:");
+	    		    age=sc.nextInt();
+	    		    s.add(new Student(id , age,name));
+	    		    break;
+	    	 case 3:
+	    		    System.out.println("Display ArrayList:");
+	    		    for(Student st:s)
+	    		    {  
+	    		     System.out.println("Id:"+st.getid());
+	    		     System.out.println("Age:"+st.getage());
+	    		     System.out.println("Name:"+st.getname());	        			    
+	    		    }
+	    		    break;
+	    	 case 4:
+	    		   System.out.println("Enter id no to remove:");
+	    		   id=sc.nextInt();
+	    		   s.remove(id);
+	    		   break;	    		   
+	    	 case 5:
+	    		    e=new LinkedList<>();
+	    		    break;	    		    
+	    	 case 6:
+	    		   System.out.println("Enter Id:");
+	    		   id=sc.nextInt();sc.nextLine();
+	    		   System.out.println("Enter Name:");
+	    		   name=sc.nextLine();
+	    		   System.out.println("Enter designation:");
+	    		   design = sc.nextLine();
+	    		   e.add(new Employee(id,name,design));
+	    		   break;
+	    	 case 7:
+	    		    System.out.println("Displaying LinkList:");
+	    		    for(Employee em:e)
+	    		    {
+	    		    	 System.out.println("ID:"+em.getid());
+	    		    	 System.out.println("Name:"+em.getname());
+                         System.out.println("Designation:"+em.getdesign());	    		    	 
+	    		    }
+	    		    break;
+	    	 case 8:
+	    		    System.out.printf("Removing front name:",e.removeFirst().name);
+	    		    break;
+	    	 case 9:
+
+	    		    System.out.printf("Removing last name:",e.removeLast().name);
+	    		    break;
+	    	default:
+	    		   System.out.println("Invalid choice:");  }}}}
+--------
+public class Employee {
+	int id;
+	String name,design;	
+	Employee(int id, String name ,String design )
+	{
+	   this.id = id;
+	   this.name =name;
+	   this.design = design;	   
+	}	
+	public int getid()
+	{
+		 return this.id;	 
+	}
+	public String getname()
+	{
+		 return this.name;		 
+	}	
+	public String getdesign()
+	{
+		 return this.design;		 
+	}}
+---
+public class Student {
+	int id,age;
+	String name;	
+	Student(int id,int age, String name)
+	{	
+		 this.id=id;
+		 this.age=age;
+		 this.name=name;		
+	}	
+	public int getid()
+	{
+		 return this.id;
+	}	
+	public int getage()
+	{
+		 return this.age;	 
+	}	
+	public String getname()
+	{
+		 return this.name;	 
+	}}

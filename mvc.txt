@@ -1,0 +1,55 @@
+package com.mymvc;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class mvccontroller {
+ @RequestMapping("/")
+ public String display() {
+	 return "display";
+ }
+ @RequestMapping("/hello")
+ public ModelAndView hello(@RequestParam String cusname,@RequestParam String cusid) {
+	 System.out.println("customer name"+cusname);
+	 System.out.println("customer Id"+cusid);
+	 ModelAndView mv=new ModelAndView("hello");
+	 mv.addObject("customer",cusname);
+	 mv.addObject("customerId",cusid);
+	 return mv;
+ }
+}
+-----
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="hello">
+Customer Name:<input type="text" name="cusname"/> 
+Customer Id:<input type="text" name="cusid"/>
+<input type="submit" value="submission"/>
+</form>
+</body>
+</html>
+------
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body bgcolor="lightblue">
+<h1 >hello welcome
+${customer }</h1>
+<h1>${customerId }</h1>
+</body>
+</html>

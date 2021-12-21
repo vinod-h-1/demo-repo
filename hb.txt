@@ -1,0 +1,124 @@
+package program3;
+import java.util.List;
+import java.util.Scanner;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+public class Student_main {
+	static Scanner sc = new Scanner(System.in);	
+	StandardServiceRegistry ssr;
+	Metadata meta;
+	SessionFactory sf;
+	Session session; 
+	Transaction t;
+	public void connect() {
+		ssr = (StandardServiceRegistry) new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		sf = meta.getSessionFactoryBuilder().build();
+		session = sf.openSession();
+		t = session.beginTransaction();
+	}
+	public void Insert() {
+		this.connect();
+		Student s = new Student();
+		s.setId(2);
+		s.setUsn("1RV20MC101");
+		s.setName("Vikas");
+		s.setAddress("Bangalore");
+		s.setMarks(455f);
+		session.save(s);
+		t.commit();
+		System.out.println("Inserted");
+	}
+	public void delete() {
+		this.connect();
+		Student s1 = new Student();
+		System.out.print("Enter ID : ");
+		int id =  sc.nextInt();
+		s1.setId(id); session.delete(s1);
+		t.commit();
+		System.out.println("Deleted");		
+	}
+	public void select() {
+		this.connect();
+		List<Student> s = session.createQuery("from Student").list();
+		for(Student i:s) {
+			System.out.println("id="+i.getId()+"name="+i.getName()+"marks="+i.getMarks());
+		}	}
+	public static void main(String[] args) {
+		Student_main sm = new Student_main();
+		while(true) {
+			System.out.println("1- Insert");
+			System.out.println("2- Select");
+			System.out.println("3- Delete");
+			System.out.print("Enter your choice : ");
+			int choice = sc.nextInt();
+			switch(choice) {
+			case 1:
+				sm.Insert();
+				break;
+			case 2:
+				sm.select();
+				break;
+			case 3:
+				sm.delete();
+				break;
+			default:
+				System.out.println("Invalid");}}}}
+------
+package program3;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Student")
+public class Student {
+	@Id
+	int Id;
+	String Name,Usn,Address;
+	float Marks;
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		this.Id = id;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		this.Name = name;
+	}
+	public String getUsn() {
+		return Usn;
+	}
+	public void setUsn(String usn) {
+		this.Usn = usn;
+	}
+	public String getAddress() {
+		return Address;
+	}
+	public void setAddress(String address) {
+		this.Address = address;
+	}
+	public float getMarks() {
+		return Marks;
+	}
+	public void setMarks(float marks) {
+		this.Marks = marks;
+	}
+	
+	}
+-----
+mysql -u 1rv20mc111 -h 172.15.65.77 -p
+show databases;
+use 1rv20mc111;
+create table Student(id int primary key,usn varchar(25),name varchar(25), address varchar(25),marks decimal);
+labs
