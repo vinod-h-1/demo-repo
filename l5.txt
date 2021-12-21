@@ -1,0 +1,266 @@
+package Lab5maven.Lab5maven;
+
+import java.io.Serializable;
+
+public class Customer implements Serializable
+{
+	private static final long serialVersionUID = -2937165078778702016L;
+	private String pname;
+	private int page;
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	@Override
+	public String toString() {
+		return " [Passanger Name=" + pname + ", Passanger Age=" + page + "]";
+	}
+	
+
+}
+-----
+package Lab5maven.Lab5maven;
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class TestClass 
+{
+	public static void main(String[] args) {
+		ApplicationContext ctx=new ClassPathXmlApplicationContext("/config.xml");
+		
+		Ticket c1=(Ticket)ctx.getBean("ticket");
+		System.out.println(c1);
+	}
+}
+----
+package Lab5maven.Lab5maven;
+
+import java.io.Serializable;
+
+public class Ticket implements Serializable
+{
+	private static final long serialVersionUID = -6931036513664758050L;
+	private String ticketNumer;
+	private double price;
+	private String source;
+	private String destination;
+	private Customer customer;
+	public String getTicketNumer() {
+		return ticketNumer;
+	}
+	public void setTicketNumer(String ticketNumer) {
+		this.ticketNumer = ticketNumer;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public String getDestination() {
+		return destination;
+	}
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	@Override
+	public String toString() {
+		return "Ticket [ticketNumer=" + ticketNumer + ", price=" + price + ", source=" + source + ", destination="
+				+ destination + ", customer=" + customer + "]";
+	}
+	
+}
+-------
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+               
+               
+     <bean class="Lab5maven.Lab5maven.Ticket" name="ticket" >
+     <property name="customer" ref="cust" />
+     <property name="ticketNumer" value="1RV20MC111" />
+     <property name="source" value="Bangalore" />
+     <property name="destination" value="Mandya" />
+     <property name="price" value="5000" />
+     </bean>
+     
+     <bean class="Lab5maven.Lab5maven.Customer" name="cust">
+     	<property name="pname" value="Vinod H"/>
+     	<property name="page" value="23" />
+     
+     </bean>
+     
+    
+</beans>
+------
+<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.3.6</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+------------------java based
+package Lab5maven2.Lab5maven2;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class Config 
+{
+	
+	@Bean
+	public Student setBeanStudent()
+	{
+		return new Student();
+	}
+	
+	@Bean
+	public Marks setBeanMarks()
+	{
+		return new Marks();
+	}
+}
+-----
+package Lab5maven2.Lab5maven2;
+
+
+import java.io.Serializable;
+
+public class Marks implements Serializable 
+{
+	private static final long serialVersionUID = 4058735100816010657L;
+	private int m1;
+	private int m2;
+	private int m3;
+	public int getM1() {
+		return m1;
+	}
+	public void setM1(int m1) {
+		this.m1 = m1;
+	}
+	public int getM2() {
+		return m2;
+	}
+	public void setM2(int m2) {
+		this.m2 = m2;
+	}
+	public int getM3() {
+		return m3;
+	}
+	public void setM3(int m3) {
+		this.m3 = m3;
+	}
+	@Override
+	public String toString() {
+		return " [Java=" + m1 + ", Python=" + m2 + ", C++=" + m3 + "]";
+	}
+	
+	
+
+}
+----
+package Lab5maven2.Lab5maven2;
+
+
+import java.io.Serializable;
+
+public class Student implements Serializable
+{
+	private static final long serialVersionUID = -1515840032609928305L;
+	private String name;
+	private String usn;
+	private Marks marks;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getUsn() {
+		return usn;
+	}
+	public void setUsn(String usn) {
+		this.usn = usn;
+	}
+	public Marks getMarks() {
+		return marks;
+	}
+	public void setMarks(Marks marks) {
+		this.marks = marks;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", usn=" + usn + ", Marks=" + marks + "]";
+	}
+	
+}
+----
+package Lab5maven2.Lab5maven2;
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class TestClass1 {
+
+	public static void main(String[] args) {
+		ApplicationContext ctx=new AnnotationConfigApplicationContext(Config.class);
+		
+		Marks marks=(Marks)ctx.getBean(Marks.class);
+		marks.setM1(98);
+		marks.setM2(88);
+		marks.setM3(79);
+		
+		Student s=ctx.getBean(Student.class);
+		s.setName("Vinod");
+		s.setUsn("1RV20MC111");
+		s.setMarks(marks);
+		
+		System.out.println(s);
+
+	}
+
+}
+
