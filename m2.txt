@@ -1,0 +1,62 @@
+button.xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:state_pressed="true"
+    android:drawable="@drawable/button_pressed"/>
+    <item
+        android:state_enabled="false"
+        android:drawable="@drawable/button_disabled"/>
+<item
+    android:drawable="@drawable/button_default"/>
+</selector>
+---------------------------------------------
+activity.java
+
+package com.example.lab2;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CalendarView;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.Switch;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    ImageButton imageButton;
+    Switch aSwitch;
+    ConstraintLayout layout;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        layout = findViewById(R.id.layout);
+        aSwitch=findViewById(R.id.switch1);
+        imageButton=findViewById(R.id.imageButton2);
+
+        CalendarView calendarView =new CalendarView(this);
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    layout.removeView(calendarView);
+                    imageButton.setEnabled(true);
+                }
+                else
+                {
+                    layout.addView(calendarView);
+                    imageButton.setEnabled(false);
+
+                }
+            }
+        });
+    }
+}
+

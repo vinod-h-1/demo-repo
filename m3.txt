@@ -1,0 +1,95 @@
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="391dp"
+        android:layout_height="390dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></FrameLayout>
+
+    <Button
+        android:id="@+id/buttonSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="72dp"
+        android:onClick="switchFragment"
+        android:text="Switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+---------------------------------------
+Mainactivity.java
+
+package com.example.program3;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.View;
+
+public class MainActivity extends AppCompatActivity {
+
+    FirstFragment mFragmentOne;
+    SecondFragment mFragmentTwo;
+    BlankFragment mFragmentThree;
+    int showingFragment=0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mFragmentOne = new FirstFragment();
+        mFragmentTwo = new SecondFragment();
+        mFragmentThree = new BlankFragment();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frameLayout,mFragmentThree);
+        fragmentTransaction.commit();
+        showingFragment=1;
+
+    }
+
+    public void switchFragment(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction =
+           fragmentManager.beginTransaction();
+        if (showingFragment==1) {
+            fragmentTransaction.replace(R.id.frameLayout,
+                    mFragmentTwo);
+            showingFragment = 2;
+        } else if(showingFragment==2) {
+            fragmentTransaction.replace(R.id.frameLayout,
+                    mFragmentOne);
+            showingFragment = 3;
+        }
+            else {
+                fragmentTransaction.replace(R.id.frameLayout,mFragmentThree);
+                showingFragment=1;
+            }
+
+        fragmentTransaction.commit();
+    }
+        }
